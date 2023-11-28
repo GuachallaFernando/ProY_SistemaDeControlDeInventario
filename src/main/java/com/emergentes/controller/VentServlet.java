@@ -10,6 +10,7 @@ import com.emergentes.entidades.Vendedo;
 import com.emergentes.entidades.Vent;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 
 import java.util.List;
 import javax.servlet.ServletException;
@@ -30,7 +31,6 @@ public class VentServlet extends HttpServlet {
         BeanClient daoClient = new BeanClient();
         BeanVendedo daoVendedo = new BeanVendedo();
         BeanDetall daoDetall = new BeanDetall();
-        
 
         Vent venta = new Vent();
         List<Client> lista;
@@ -44,11 +44,18 @@ public class VentServlet extends HttpServlet {
             case "add":
                 lista = daoClient.listarTodos();
                 request.setAttribute("Cliente", lista);
+
                 listaV = daoVendedo.listarTodos();
                 request.setAttribute("Vendedor", listaV);
+
                 listaD = daoDetall.listarTodos();
                 request.setAttribute("categorias", listaD);
+
+                // Configura el objeto "venta" pero también configura los atributos "client" y "vendedo"
                 request.setAttribute("venta", venta);
+                request.setAttribute("client", lista); // Asegúrate de tener el atributo "client" configurado
+                request.setAttribute("vendedo", listaV); // Asegúrate de tener el atributo "vendedo" configurado
+
                 request.getRequestDispatcher("venta-edit.jsp").forward(request, response);
                 break;
 
@@ -94,7 +101,19 @@ public class VentServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String nombre = request.getParameter("nombre");
         String fecha = request.getParameter("fecha");
-        double total = Double.parseDouble(request.getParameter("total"));
+
+        String totalParameter = request.getParameter("total");
+        BigDecimal total = BigDecimal.ZERO;  // O cualquier otro valor predeterminado
+
+        if (totalParameter != null && !totalParameter.isEmpty()) {
+            try {
+                total = new BigDecimal(totalParameter);
+            } catch (NumberFormatException | ArithmeticException e) {
+                // Manejar la excepción si la conversión no es posible
+                e.printStackTrace(); // O realiza un manejo más adecuado según tus necesidades
+            }
+        }
+
         int cliente_id = Integer.parseInt(request.getParameter("cliente_id"));
         int vendedor_id = Integer.parseInt(request.getParameter("vendedor_id"));
         ////int detalle_id = Integer.parseInt(request.getParameter("detalle_id"));
@@ -121,5 +140,3 @@ public class VentServlet extends HttpServlet {
 
     }
 }
-
-

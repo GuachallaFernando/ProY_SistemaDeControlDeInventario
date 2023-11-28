@@ -67,7 +67,7 @@ public class Vent implements Serializable {
         this.id = 0;
         this.nombreCli = "";
         this.fecha = "";
-        this.total = BigDecimal.ZERO;
+        this.total = new BigDecimal("0.0");
         this.cliente = new Client(); // Debes ajustar esta línea si tienes un constructor adecuado para Client
         this.vendedor = new Vendedo(); // Ajusta esta línea según tu constructor para Vendedo
         this.detallList = new ArrayList<Detall>(); // Puedes usar otra implementación de List si lo prefieres
@@ -154,13 +154,13 @@ public class Vent implements Serializable {
         return true;
     }
 
-    ///@Override
-    ///public String toString() {
-       //7 return "Vent{" + "id=" + id + ", nombreCli=" + nombreCli + ", fecha=" + fecha + ", total=" + total + ", cliente=" + cliente + ", vendedor=" + vendedor + ", detallList=" + detallList + '}';
-    ///}
+    @Override
+    public String toString() {
+       return "Vent{" + "id=" + id + ", nombreCli=" + nombreCli + ", fecha=" + fecha + ", total=" + total + ", cliente=" + cliente + ", vendedor=" + vendedor + ", detallList=" + detallList + '}';
+    }
 
     public void setTotal(double total) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     

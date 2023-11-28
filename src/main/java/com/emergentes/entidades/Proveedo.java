@@ -59,10 +59,10 @@ public class Proveedo implements Serializable {
     private List<Producto> productoList;
 
     public Proveedo() {
-        this.id=0;
-        this.ruc="";
-        this.nombre="";
-        this.telefono="";
+        this.id = 0;
+        this.ruc = "";
+        this.nombre = "";
+        this.telefono = "";
         this.direccion = "";
         this.productoList = new ArrayList<Producto>();
     }
@@ -145,5 +145,4 @@ public class Proveedo implements Serializable {
         return "Proveedo{" + "id=" + id + ", ruc=" + ruc + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion + ", productoList=" + productoList + '}';
     }
 
-  
 }

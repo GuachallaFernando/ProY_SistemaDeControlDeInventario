@@ -3,7 +3,7 @@
 <%
 
     List<Vent> ventas = (List<Vent>) request.getAttribute("ventas");
-    
+
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,22 +28,22 @@
                 <th></th>
                 <th></th>
             </tr>
-            <%
-                for(Vent item : ventas){
+            <%    for (Vent item : ventas) {
             %>
             <tr>
-                <td><%= item.getId() %></td>
-                <td><%= item.getCliente().getId() %></td>
+                <td><%= item.getId()%></td>
+                <td><%= (item.getCliente() != null) ? item.getCliente().getId() : ""%></td>
                 <td><%= item.getNombreCli()%></td>
-                <td><%= item.getVendedor().getCi() %></td>
+                <td><%= (item.getVendedor() != null) ? item.getVendedor().getId() : ""%></td>
                 <td><%= item.getFecha()%></td>
                 <td><%= item.getTotal()%></td>
-                <td><a href="VentServlet?action=edit&id=<%= item.getId() %>">Editar</td>
-                <td><a href="VentServlet?action=dele&id=<%= item.getId() %>" onclick="return(confirm('Esta Seguro de quere hacerlo'))">Eliminar</td>
+                <td><a href="VentServlet?action=edit&id=<%= item.getId()%>">Editar</td>
+                <td><a href="VentServlet?action=dele&id=<%= item.getId()%>" onclick="return(confirm('¿Está seguro de querer hacerlo?'))">Eliminar</td>
             </tr>
-             <%
-                 }
+            <%
+                }
             %>
         </table>
+            <li><a href="Bienvenido.jsp">Volver</a></li>
     </body>
 </html>
